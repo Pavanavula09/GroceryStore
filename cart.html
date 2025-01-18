@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link rel="icon" href="Products/cart.jpg" type="image/jpg">
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Your Cart</h1>
+  </header>
+
+  <main>
+    <div id="cart-container">
+      <div id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+      </div>
+      <div id="cart-summary">
+        <h3>Total Price: <span id="total-price">0.00 GBP</span></h3>
+        <!-- Checkout Button with Redirect -->
+        <button id="checkout-button" onclick="window.location.href='checkout.html'">Checkout</button>
+        <!-- Clear Cart Button -->
+        <button id="clear-cart-button" onclick="clearCart()">Clear Cart</button>
+      </div>
+
+      <!-- Navigation Buttons to Products or Home -->
+      <div id="navigation-buttons">
+        <a href="order-now.html" class="btn">Go Back</a>
+        <a href="index.html" class="btn">Go to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Grocery Store. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="cart.js"></script>
+
+  <script>
+    // Function to clear the cart
+    function clearCart() {
+      // Clear cart data from localStorage
+      localStorage.removeItem('cart');
+      
+      // Reset cart items on the page
+      document.getElementById("cart-items").innerHTML = "";
+
+      // Reset the total price
+      document.getElementById("total-price").textContent = "0.00 GBP";
+
+      // Update cart count in other parts of the website (if applicable)
+      updateCartCount();
+    }
+
+    // Update cart count from localStorage
+    function updateCartCount() {
+      const cartCount = document.getElementById("cart-count");
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cartCount.textContent = `(${cart.length} items)`;
+    }
+  </script>
+</body>
+</html>
